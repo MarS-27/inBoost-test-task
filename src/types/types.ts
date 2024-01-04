@@ -1,18 +1,12 @@
-type TPosition = {
-  x: number;
-  y: number;
-};
+import { Node } from "reactflow";
 
-type TData = {
+export type TNodeData = {
   label: string;
+  checkedVariant: string;
 };
 
-export type TNode = {
-  id: string;
-  position: TPosition;
-  data: TData;
-};
+export type TCustomNode = Node<TNodeData>;
 
 export type TNodesReducerState = {
-  nodes: TNode[];
+  nodes: TCustomNode[];
 };
