@@ -1,8 +1,12 @@
 import { Node } from "reactflow";
 
+export type TNodeVariants = {
+  id: string;
+  variant: string;
+};
+
 export type TNodeData = {
-  label: string;
-  checkedVariant: string;
+  variants: TNodeVariants[];
 };
 
 export type TCustomNode = Node<TNodeData>;

@@ -1,12 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TCustomNode } from "../../types/types";
+import { api } from "./api";
 
-const MOCKAPI_URL = import.meta.env.VITE_MOCKAPI_URL;
-
-export const nodesApi = createApi({
-  reducerPath: "nodesApi",
-  baseQuery: fetchBaseQuery({ baseUrl: MOCKAPI_URL }),
-  tagTypes: ["Nodes"],
+export const nodesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getNodes: builder.query<TCustomNode[], string>({
       query: () => "/nodes",
@@ -18,7 +13,7 @@ export const nodesApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Nodes"],
+      invalidatesTags: ["Nodes", "Edges"],
     }),
     updateNode: builder.mutation<TCustomNode, Partial<TCustomNode>>({
       query(data) {

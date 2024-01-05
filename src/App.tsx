@@ -4,7 +4,6 @@ import ReactFlow, {
   addEdge,
   Connection,
   Edge,
-  MarkerType,
   NodeDragHandler,
   useEdgesState,
   useNodesState,
@@ -16,36 +15,19 @@ import {
   useUpdateNodeMutation,
 } from "./store/services/nodes";
 import { SelectVariantNode } from "./components/SelectVariantNode";
-
-const initialEdges = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
-    markerEnd: {
-      type: MarkerType.Arrow,
-    },
-  },
-  {
-    id: "e1-3",
-    source: "2",
-    target: "3",
-    markerEnd: {
-      type: MarkerType.Arrow,
-    },
-  },
-];
+import { useGetEdgessQuery } from "./store/services/edges";
 
 const nodeTypes = {
   selectorNode: SelectVariantNode,
 };
 
 function App() {
-  const { data } = useGetNodesQuery("Nodes");
+  const { data: initialData } = useGetNodesQuery("Nodes");
+  const { data: initialEdges } = useGetEdgessQuery("Edges");
   const [updateNode] = useUpdateNodeMutation();
 
   const [nodes, setNodes, onNodesChange] = useNodesState<TNodeData>([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge[]>(initialEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge[]>([]);
 
   const onConnect = useCallback(
     (params: Edge | Connection) => {
@@ -60,10 +42,11 @@ function App() {
   };
 
   useEffect(() => {
-    if (data) {
-      setNodes(data);
+    if (initialData && initialEdges) {
+      setNodes(initialData);
+      setEdges(initialEdges);
     }
-  }, [data]);
+  }, [initialData, initialEdges]);
 
   return (
     <main style={{ width: "100vw", height: "100vh" }}>
