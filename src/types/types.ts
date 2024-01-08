@@ -1,4 +1,4 @@
-import { Node } from "reactflow";
+import { type Node } from "reactflow";
 
 export type TNodeVariants = {
   id: string;

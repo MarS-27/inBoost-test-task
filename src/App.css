@@ -8,6 +8,7 @@
 .decoration-block {
   width: 100%;
   height: 72px;
+  padding: 4px;
   background: white;
   border-radius: 4px;
   margin-bottom: 6px;

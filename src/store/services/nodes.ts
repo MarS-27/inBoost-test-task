@@ -1,4 +1,4 @@
-import { TCustomNode } from "../../types/types";
+import { type TCustomNode } from "../../types/types";
 import { api } from "./api";
 
 export const nodesApi = api.injectEndpoints({
@@ -13,7 +13,7 @@ export const nodesApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Nodes", "Edges"],
+      invalidatesTags: ["Nodes"],
     }),
     updateNode: builder.mutation<TCustomNode, Partial<TCustomNode>>({
       query(data) {

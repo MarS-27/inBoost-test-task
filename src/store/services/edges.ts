@@ -1,4 +1,4 @@
-import { Edge } from "reactflow";
+import { type Edge } from "reactflow";
 import { api } from "./api";
 
 export const edgesApi = api.injectEndpoints({
@@ -13,6 +13,7 @@ export const edgesApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Edges"],
     }),
   }),
 });
